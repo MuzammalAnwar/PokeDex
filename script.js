@@ -43,10 +43,23 @@ function showMoreImg() {
 }
 
 function showNextPokemons() {
-    // indexEnd <= pokemons.length ? (indexStart += 20, indexEnd += 20) : console.log("Hello");;
     if (indexEnd <= pokemons.length) {
         indexStart += 20;
         indexEnd += 20;
+        if (indexEnd >= pokemons.length) {
+            indexEnd = pokemons.length
+            hideElement('showMoreIconImgLeft', 'd-none')
+        }
+    } else {
+        console.log("Hello")
+    }
+    render();
+}
+
+function showPreviousPokemons() {
+    if (indexStart >= 20) {
+        indexStart -= 20;
+        indexEnd -= 20;
         if (indexEnd >= pokemons.length) {
             indexEnd = pokemons.length
             hideElement('showMoreIconImgLeft', 'd-none')
