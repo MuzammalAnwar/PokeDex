@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(360deg, #2E3192 0%, #1BFFFF 100%);
+}
+
+header {
+    background: linear-gradient(0deg, #1BFFFF 0%, #2E3192 100%);
+    border-bottom: 2px solid white;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+footer {
+    background: linear-gradient(0deg, #1BFFFF 0%, #2E3192 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-direction: column;
+    border-top: 2px solid white;
+
+}
+
+header h1,
+footer p {
+    margin: 0;
+}
+
+.pokeCardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
