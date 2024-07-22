@@ -3,10 +3,31 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
     background: linear-gradient(360deg, #2E3192 0%, #1BFFFF 100%);
+}
+
+.d-none {
+    display: none;
+}
+
+/* Custom scrollbar styles for webkit browsers */
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3079ff;
+    border-radius: 10px;
+    border: 3px solid #f4f4f4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2E3192;
 }
 
 header {
@@ -15,10 +36,8 @@ header {
     color: white;
     text-align: center;
     padding: 2rem;
-    position: absolute;
+    position: sticky;
     top: 0;
-    right: 0;
-    left: 0;
 }
 
 footer {
@@ -26,16 +45,11 @@ footer {
     color: white;
     text-align: center;
     padding: 2rem;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
     display: flex;
     justify-content: center;
     gap: 8px;
     flex-direction: column;
     border-top: 2px solid white;
-
 }
 
 header h1,
@@ -46,9 +60,47 @@ footer p {
 .pokeCardContainer {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
     padding: 20px;
-    background-color: #fff;
+}
+
+.card {
+    background-color: #ffffff;
+    color: black;
+    padding: 20px;
     border-radius: 10px;
+    height: 12rem;
+    width: 12rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card img {
+    width: 100px;
+    height: 100px;
+}
+
+#showMoreIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0 12px 0;
+}
+
+.showMoreIcon {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 999px;
+    background-color: white;
+}
+
+.showMoreIcon:hover {
+    transition: 75ms all;
+    padding: 0 12px 0 12px;
 }
