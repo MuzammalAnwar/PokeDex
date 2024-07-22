@@ -1,17 +1,20 @@
-let pokemons = {}
-let index = 20;
+let pokemons = []
+let indexStart = 0;
+let indexEnd = 20;
 
-const BASE_URL = 'https://pokeapi.co/api/v2/';
+const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
 function init() {
-    getPokemon(50, 0);
+    getPokemonURL(1, 152);
 }
 
-async function getPokemon(limit, offset) {
-    let path = `pokemon?limit=${limit}&offset=${offset}`
-    let response = await fetch(BASE_URL + path + ".json");
-    let responseAsText = await response.json();
-    pokemons = responseAsText.results;
+async function getPokemonURL(start, end) {
+    for (let i = start; i < (end + 1); i++) {
+        let path = `/${i}/`
+        let response = await fetch(BASE_URL + path);
+        let responseAsJson = await response.json();
+        pokemons.push(responseAsJson);
+    }
     console.log(pokemons)
     render()
 }
@@ -19,7 +22,7 @@ async function getPokemon(limit, offset) {
 function render() {
     let inputContent = document.getElementById('pokeCardContainer');
     inputContent.innerHTML = '';
-    for (let i = 0; i < (pokemons.length > 20 ? index : pokemons.length); i++) {
+    for (let i = indexStart; i < indexEnd; i++) {
         inputContent.innerHTML += /*HTML*/`
             <div class="card" id="pokemon${i}">
                 <h1>${i + 1} ${pokemons[i].name}</h1>
@@ -32,12 +35,25 @@ function render() {
 function showMoreImg() {
     let inputContent = document.getElementById('showMoreIcon');
     inputContent.innerHTML = /*HTML*/`
-        <img id="showMoreIconImg" class="showMoreIcon" onclick="showMorePokemons()" src="./img/showMoreIcon.png">
+        <div id="showMoreIconImgLeft" class="">
+            <img class="showMoreIconLeft" onclick="showPreviousPokemons()" src="./img/showMoreIcon.png">
+        </div>
+        <img id="showMoreIconImg" class="showMoreIcon" onclick="showNextPokemons()" src="./img/showMoreIcon.png">
     `;
 }
 
-function showMorePokemons() {
-    index > 20 ? (index = pokemons.length, hideElement('morePokemons', 'd-none')) : (index += 20);
+function showNextPokemons() {
+    // indexEnd <= pokemons.length ? (indexStart += 20, indexEnd += 20) : console.log("Hello");;
+    if (indexEnd <= pokemons.length) {
+        indexStart += 20;
+        indexEnd += 20;
+        if (indexEnd >= pokemons.length) {
+            indexEnd = pokemons.length
+            hideElement('showMoreIconImgLeft', 'd-none')
+        }
+    } else {
+        console.log("Hello")
+    }
     render();
 }
 

@@ -75,8 +75,6 @@ footer p {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .card img {
@@ -89,6 +87,10 @@ footer p {
     align-items: center;
     justify-content: center;
     padding: 12px 0 12px 0;
+    gap: 12px;
+    position: fixed;
+    left: 40px;
+    top: 20px;
 }
 
 .showMoreIcon {
@@ -98,9 +100,30 @@ footer p {
     object-fit: cover;
     border-radius: 999px;
     background-color: white;
+    padding: 2px;
+    margin: 12px;
+}
+
+.showMoreIconLeft {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 999px;
+    background-color: white;
+    padding: 2px;
+    rotate: -180deg;
+    margin: 12px;
+}
+
+.showMoreIconLeft:hover {
+    transition: 200ms all;
+    rotate: -540deg;
+    width: 55px;
 }
 
 .showMoreIcon:hover {
-    transition: 75ms all;
-    padding: 0 12px 0 12px;
+    transition: 200ms all;
+    rotate: 720deg;
+    width: 55px;
 }
