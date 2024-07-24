@@ -1,6 +1,7 @@
 let pokemons = []
 let indexStart = 0;
 let indexEnd = 20;
+let totalAmountOfPokemons = 1025;
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -28,36 +29,46 @@ function render() {
     let inputContent = document.getElementById('pokeCardContainer');
     inputContent.innerHTML = '';
     for (let i = 0; i < pokemons.length; i++) {
-        inputContent.innerHTML += /*HTML*/`
-            <div class="card" id="pokemon${i}">
-                <div class="pokemonNameAndIndex">                    
-                    <h3>#${indexStart + i + 1}</h3>
-                    <h3 class="pokemonName">${capitalizeFirstLetter(pokemons[i].name)}</h3>
-                </div>
-                    <div class="pokemonImgContainer"><img src="${pokemons[i].sprites.front_default}" alt=""></div>
-                <p>${returnTypesOfPokemon(i)}</p>
-            </div>
-        `;
-        returnBackgroundColor(i)
+        inputContent.innerHTML += renderTemplate(i);
+        returnBackgroundColor(i, `pokemon${i}`)
     }
     showMoreImg();
 }
 
-function returnTypesOfPokemon(i) {
-    return pokemons[i].types.length == 1 ? pokemons[i].types[0].type.name : pokemons[i].types[0].type.name + ' ' + pokemons[i].types[1].type.name
+function renderOnePokemonCard(i) {
+    showElement('showPokemonFullCard', 'd-none');
+    let inputContent = document.getElementById('popUp');
+    inputContent.innerHTML = renderOnePokemonCardTemplate(i);
+    returnBackgroundColor(i, `popUp`)
+}
+
+function showNextPokemonCard(i) {
+    if (i > 18) {
+        hideElement('showPokemonFullCard', 'd-none')
+    } else {
+        renderOnePokemonCard(i + 1);
+    }
+}
+
+function showPreviousPokemonCard(i) {
+    if (i < 1) {
+        hideElement('showPokemonFullCard', 'd-none')
+    } else {
+        renderOnePokemonCard(i - 1);
+    }
 }
 
 function showMoreImg() {
-    indexEnd >= 1200 ? hideElement('showMoreIconRight', 'd-none') : showElement('showMoreIconRight', 'd-none');
+    indexEnd >= totalAmountOfPokemons ? hideElement('showMoreIconRight', 'd-none') : showElement('showMoreIconRight', 'd-none');
     indexStart <= 0 ? hideElement('showMoreIconLeft', 'd-none') : showElement('showMoreIconLeft', 'd-none');
 }
 
 function showNextPokemons() {
-    if (indexEnd < 1100) {
+    if (indexEnd < totalAmountOfPokemons) {
         indexStart += 20;
         indexEnd += 20;
-        if (indexEnd > 1100) {
-            indexEnd = 1100;
+        if (indexEnd > totalAmountOfPokemons) {
+            indexEnd = totalAmountOfPokemons;
         }
         getPokemonURL(indexStart + 1, indexEnd);
     }
@@ -82,10 +93,18 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
+function returnTypesOfPokemon(i) {
+    return pokemons[i].types.length == 1 ? pokemons[i].types[0].type.name : pokemons[i].types[0].type.name + ' / ' + pokemons[i].types[1].type.name
+}
+
 function hideElement(id, x) {
     document.getElementById(id).classList.add(x);
 }
 
 function showElement(id, x) {
     document.getElementById(id).classList.remove(x);
+}
+
+function stopClose(event) {
+    event.stopPropagation();
 }

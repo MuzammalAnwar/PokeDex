@@ -1,4 +1,4 @@
-function returnBackgroundColor(i) {
+function returnBackgroundColor(i, id) {
     const typeStyles = {
         normal: { background: "white" },
         poison: { background: "linear-gradient(248deg, rgba(214,0,255,1) 0%, rgba(255,0,116,1) 100%)" },
@@ -23,7 +23,7 @@ function returnBackgroundColor(i) {
     const typeName = pokemons[i].types[0].type.name;
     const styles = typeStyles[typeName] || {};
 
-    const element = document.getElementById(`pokemon${i}`);
+    const element = document.getElementById(id);
     element.style.background = styles.background || "";
     element.style.color = styles.color || "";
 }
