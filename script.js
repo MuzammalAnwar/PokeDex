@@ -5,31 +5,34 @@ let indexEnd = 20;
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
 function init() {
-    getPokemonURL(1, 128);
+    getPokemonURL(indexStart + 1, indexEnd);
 }
 
 async function getPokemonURL(start, end) {
     try {
-        for (let i = start; i < (end + 1); i++) {
-            let path = `/${i}/`
-            let response = await fetch(BASE_URL + path);
-            let responseAsJson = await response.json();
-            pokemons.push(responseAsJson);
+        let promises = [];
+        for (let i = start; i <= end; i++) {
+            let path = `/${i}/`;
+            promises.push(fetch(BASE_URL + path).then(response => response.json()));
         }
+        let fetchedPokemons = await Promise.all(promises);
+        pokemons = fetchedPokemons;
     } catch (error) {
         console.error('Error fetching Pokémon:', error);
     } finally {
-        render()
+        render();
     }
 }
 
 function render() {
     let inputContent = document.getElementById('pokeCardContainer');
     inputContent.innerHTML = '';
-    for (let i = indexStart; i < indexEnd && i < pokemons.length; i++) {
+    for (let i = 0; i < pokemons.length; i++) {
         inputContent.innerHTML += /*HTML*/`
-            <div class="card" id="pokemon${i}">
-                <h1>${i + 1} ${pokemons[i].name}</h1>
+            <div class="card" id="pokemon${indexStart + i}">
+                <h1>${indexStart + i + 1} ${pokemons[i].name}</h1>
+                <img src="${pokemons[i].sprites.front_default}" alt="">
+                <p>${pokemons[i].types[0].type.name}</p>
             </div>
         `;
     }
@@ -37,21 +40,20 @@ function render() {
 }
 
 function showMoreImg() {
-    indexEnd >= pokemons.length ? hideElement('showMoreIconRight', 'd-none') : showElement('showMoreIconRight', 'd-none');
+    indexEnd >= 1100 ? hideElement('showMoreIconRight', 'd-none') : showElement('showMoreIconRight', 'd-none');
     indexStart <= 0 ? hideElement('showMoreIconLeft', 'd-none') : showElement('showMoreIconLeft', 'd-none');
 }
 
 function showNextPokemons() {
-    if (indexEnd < pokemons.length) {
+    if (indexEnd < 1100) {
         indexStart += 20;
         indexEnd += 20;
-        if (indexEnd > pokemons.length) {
-            indexEnd = pokemons.length;
+        if (indexEnd > 1100) {
+            indexEnd = 1100;
         }
+        getPokemonURL(indexStart + 1, indexEnd);
     }
-    render();
 }
-
 function showPreviousPokemons() {
     if (indexStart > 0) {
         indexStart -= 20;
@@ -65,7 +67,7 @@ function showPreviousPokemons() {
         }
         showElement('showMoreIconRight', 'd-none');
     }
-    render();
+    getPokemonURL(indexStart + 1, indexEnd);
 }
 
 function hideElement(id, x) {
