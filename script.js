@@ -29,18 +29,26 @@ function render() {
     inputContent.innerHTML = '';
     for (let i = 0; i < pokemons.length; i++) {
         inputContent.innerHTML += /*HTML*/`
-            <div class="card" id="pokemon${indexStart + i}">
-                <h1>${indexStart + i + 1} ${pokemons[i].name}</h1>
-                <img src="${pokemons[i].sprites.front_default}" alt="">
-                <p>${pokemons[i].types[0].type.name}</p>
+            <div class="card" id="pokemon${i}">
+                <div class="pokemonNameAndIndex">                    
+                    <h3>#${indexStart + i + 1}</h3>
+                    <h3 class="pokemonName">${capitalizeFirstLetter(pokemons[i].name)}</h3>
+                </div>
+                    <div class="pokemonImgContainer"><img src="${pokemons[i].sprites.front_default}" alt=""></div>
+                <p>${returnTypesOfPokemon(i)}</p>
             </div>
         `;
+        returnBackgroundColor(i)
     }
     showMoreImg();
 }
 
+function returnTypesOfPokemon(i) {
+    return pokemons[i].types.length == 1 ? pokemons[i].types[0].type.name : pokemons[i].types[0].type.name + ' ' + pokemons[i].types[1].type.name
+}
+
 function showMoreImg() {
-    indexEnd >= 1100 ? hideElement('showMoreIconRight', 'd-none') : showElement('showMoreIconRight', 'd-none');
+    indexEnd >= 1200 ? hideElement('showMoreIconRight', 'd-none') : showElement('showMoreIconRight', 'd-none');
     indexStart <= 0 ? hideElement('showMoreIconLeft', 'd-none') : showElement('showMoreIconLeft', 'd-none');
 }
 
@@ -68,6 +76,10 @@ function showPreviousPokemons() {
         showElement('showMoreIconRight', 'd-none');
     }
     getPokemonURL(indexStart + 1, indexEnd);
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 function hideElement(id, x) {

@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -59,6 +59,24 @@ footer p {
     margin: 0;
 }
 
+p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+h3 {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
 .pokeCardContainer {
     display: flex;
     flex-wrap: wrap;
@@ -68,20 +86,20 @@ footer p {
 }
 
 .card {
-    background-color: #ffffff;
+    background: unset;
     color: black;
     padding: 20px;
     border-radius: 10px;
     height: 22rem;
     width: 12rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
 .card img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
 }
 
 #showMoreIcon {
@@ -140,4 +158,18 @@ footer p {
     position: fixed;
     top: 1rem;
     right: 6rem;
+}
+
+/* Card Info class*/
+.pokemonName {
+    text-align: center;
+}
+
+.pokemonImgContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.pokemonNameAndIndex {
+    text-align: center;
 }
