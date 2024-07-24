@@ -5,67 +5,65 @@ let indexEnd = 20;
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
 function init() {
-    getPokemonURL(1, 152);
+    getPokemonURL(1, 128);
 }
 
 async function getPokemonURL(start, end) {
-    for (let i = start; i < (end + 1); i++) {
-        let path = `/${i}/`
-        let response = await fetch(BASE_URL + path);
-        let responseAsJson = await response.json();
-        pokemons.push(responseAsJson);
+    try {
+        for (let i = start; i < (end + 1); i++) {
+            let path = `/${i}/`
+            let response = await fetch(BASE_URL + path);
+            let responseAsJson = await response.json();
+            pokemons.push(responseAsJson);
+        }
+    } catch (error) {
+        console.error('Error fetching Pokémon:', error);
+    } finally {
+        render()
     }
-    console.log(pokemons)
-    render()
 }
 
 function render() {
     let inputContent = document.getElementById('pokeCardContainer');
     inputContent.innerHTML = '';
-    for (let i = indexStart; i < indexEnd; i++) {
+    for (let i = indexStart; i < indexEnd && i < pokemons.length; i++) {
         inputContent.innerHTML += /*HTML*/`
             <div class="card" id="pokemon${i}">
                 <h1>${i + 1} ${pokemons[i].name}</h1>
             </div>
         `;
     }
-    showMoreImg()
+    showMoreImg();
 }
 
 function showMoreImg() {
-    let inputContent = document.getElementById('showMoreIcon');
-    inputContent.innerHTML = /*HTML*/`
-        <div id="showMoreIconImgLeft" class="">
-            <img class="showMoreIconLeft" onclick="showPreviousPokemons()" src="./img/showMoreIcon.png">
-        </div>
-        <img id="showMoreIconImg" class="showMoreIcon" onclick="showNextPokemons()" src="./img/showMoreIcon.png">
-    `;
+    indexEnd >= pokemons.length ? hideElement('showMoreIconRight', 'd-none') : showElement('showMoreIconRight', 'd-none');
+    indexStart <= 0 ? hideElement('showMoreIconLeft', 'd-none') : showElement('showMoreIconLeft', 'd-none');
 }
 
 function showNextPokemons() {
-    if (indexEnd <= pokemons.length) {
+    if (indexEnd < pokemons.length) {
         indexStart += 20;
         indexEnd += 20;
-        if (indexEnd >= pokemons.length) {
-            indexEnd = pokemons.length
-            hideElement('showMoreIconImgLeft', 'd-none')
+        if (indexEnd > pokemons.length) {
+            indexEnd = pokemons.length;
         }
-    } else {
-        console.log("Hello")
     }
     render();
 }
 
 function showPreviousPokemons() {
-    if (indexStart >= 20) {
+    if (indexStart > 0) {
         indexStart -= 20;
-        indexEnd -= 20;
-        if (indexEnd >= pokemons.length) {
-            indexEnd = pokemons.length
-            hideElement('showMoreIconImgLeft', 'd-none')
+        if (indexEnd % 20 !== 0) {
+            indexEnd = indexStart + 20;
+        } else {
+            indexEnd -= 20;
         }
-    } else {
-        console.log("Hello")
+        if (indexStart < 0) {
+            indexStart = 0;
+        }
+        showElement('showMoreIconRight', 'd-none');
     }
     render();
 }

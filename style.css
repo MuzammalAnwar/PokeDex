@@ -44,12 +44,14 @@ footer {
     background: linear-gradient(0deg, #1BFFFF 0%, #2E3192 100%);
     color: white;
     text-align: center;
-    padding: 2rem;
     display: flex;
     justify-content: center;
     gap: 8px;
     flex-direction: column;
     border-top: 2px solid white;
+    width: 100%;
+    height: 4.5rem;
+    padding: 12px 0 12px 0;
 }
 
 header h1,
@@ -126,4 +128,16 @@ footer p {
     transition: 200ms all;
     rotate: 720deg;
     width: 55px;
+}
+
+#showMoreIconRight {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+#showMoreIconLeft {
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
