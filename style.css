@@ -34,10 +34,30 @@ header {
     background: linear-gradient(0deg, #1BFFFF 0%, #2E3192 100%);
     border-bottom: 2px solid white;
     color: white;
-    text-align: center;
     padding: 2rem;
     position: sticky;
     top: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 12px;
+}
+
+input {
+    width: 15%;
+    padding: 2px 0 2px 8px;
+    border: none;
+    border-radius: 999px;
+    color: black;
+}
+
+input:focus {
+    transition: 75ms all;
+    width: 20%;
+    border: none;
+    outline: transparent;
 }
 
 footer {
@@ -191,7 +211,7 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 9999;
     position: fixed;
     top: 0;
@@ -217,4 +237,141 @@ h3 {
 .flex {
     display: flex;
     flex-direction: column;
+}
+
+.visibleProgressBar {
+    border-radius: 999px;
+}
+
+.statsBarContainer {
+    padding: 16px;
+    background-color: white;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+
+}
+
+.cardFullView {
+    background: unset;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    height: 15rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar-fill.hp {
+    background-color: #ff5959;
+}
+
+.bar-fill.attack {
+    background-color: #f5ac78;
+}
+
+.bar-fill.defense {
+    background-color: #fae078;
+}
+
+.bar-fill.speed {
+    background-color: #81e067;
+}
+
+.bar-fill.special-attack {
+    background-color: #9db7f5;
+}
+
+.bar-fill.special-defense {
+    background-color: #a7db8d;
+}
+
+.statName {
+    text-align: center;
+    color: black
+}
+
+.statsNumber {
+    text-align: center;
+    color: black;
+}
+
+.wholeProgressBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.weightIconImg {
+    margin-top: 12px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.heightIconImg {
+    margin-top: 12px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.flexAndAlign {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heightAndWeightContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+@media (max-width: 700px) {
+    .pokeCardContainer {
+        margin-top: 4rem;
+    }
+
+    #showMoreIconLeft {
+        position: fixed;
+        top: 7rem;
+        right: 60%;
+    }
+
+    #showMoreIconRight {
+        position: fixed;
+        top: 7rem;
+        left: 60%;
+    }
+
+    #popUp {
+        margin-top: 8rem;
+    }
+
+    .cardFullView {
+        height: 14rem;
+        width: 14rem;
+    }
+
+    input {
+        width: 13rem;
+    }
+}
+
+@media (max-width: 540px) {
+    header h1 {
+        font-size: 20px;
+    }
+
+
+    #showMoreIconLeft {
+        top: 6rem;
+    }
+
+    #showMoreIconRight {
+        top: 6rem;
+    }
 }

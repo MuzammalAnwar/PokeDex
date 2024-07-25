@@ -15,6 +15,7 @@
 <body onload="init()">
     <header>
         <h1>My Pokémon Showcase</h1>
+        <input type="text" id="searchPokemon" placeholder="Search Pokémon...">
     </header>
     <section class="pokeCardContainer" id="pokeCardContainer"></section>
     <section id="morePokemons">
@@ -25,10 +26,10 @@
             <img class="showMoreIcon" onclick="showNextPokemons()" src="./img/showMoreIcon.png">
         </div>
     </section>
-    <footer>
+    <!-- <footer>
         <p>Powered by PokeAPI</p>
         <p>Made by Muzammal Anwar</p>
-    </footer>
+    </footer> -->
     <section id="showPokemonFullCard" class="d-none" onclick="hideElement('showPokemonFullCard','d-none')">
         <div class="popupContainer">
             <div id="popUp" onclick="stopClose(event)"></div>

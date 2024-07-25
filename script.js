@@ -25,6 +25,23 @@ async function getPokemonURL(start, end) {
     }
 }
 
+async function handleSearch(query) {
+    if (query.length >= 3) {
+        try {
+            const response = await fetch(`${BASE_URL}?limit=1000`);
+            const data = await response.json();
+            const filteredPokemons = data.results.filter(pokemon => pokemon.name.includes(query));
+            const detailedPokemons = await Promise.all(filteredPokemons.map(p => fetch(p.url).then(res => res.json())));
+            pokemons = detailedPokemons;
+            render();
+        } catch (error) {
+            console.error('Error fetching Pokémon:', error);
+        }
+    } else {
+        getPokemonURL(indexStart + 1, indexEnd);
+    }
+}
+
 function render() {
     let inputContent = document.getElementById('pokeCardContainer');
     inputContent.innerHTML = '';
@@ -43,19 +60,11 @@ function renderOnePokemonCard(i) {
 }
 
 function showNextPokemonCard(i) {
-    if (i > 18) {
-        hideElement('showPokemonFullCard', 'd-none')
-    } else {
-        renderOnePokemonCard(i + 1);
-    }
+    i > 18 ? hideElement('showPokemonFullCard', 'd-none') : renderOnePokemonCard(i + 1);
 }
 
 function showPreviousPokemonCard(i) {
-    if (i < 1) {
-        hideElement('showPokemonFullCard', 'd-none')
-    } else {
-        renderOnePokemonCard(i - 1);
-    }
+    i < 1 ? hideElement('showPokemonFullCard', 'd-none') : renderOnePokemonCard(i - 1);
 }
 
 function showMoreImg() {
@@ -108,3 +117,9 @@ function showElement(id, x) {
 function stopClose(event) {
     event.stopPropagation();
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const pokemonSearchInput = document.getElementById('searchPokemon');
+    pokemonSearchInput.addEventListener('input', () => handleSearch(pokemonSearchInput.value.trim().toLowerCase()));
+    init();
+});
