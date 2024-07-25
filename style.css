@@ -34,7 +34,7 @@ header {
     background: linear-gradient(0deg, #1BFFFF 0%, #2E3192 100%);
     border-bottom: 2px solid white;
     color: white;
-    padding: 2rem;
+    padding: 0.75rem;
     position: sticky;
     top: 0;
     display: flex;
@@ -42,11 +42,11 @@ header {
     flex-direction: column;
     text-align: center;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 input {
-    width: 15%;
+    width: 15rem;
     padding: 2px 0 2px 8px;
     border: none;
     border-radius: 999px;
@@ -132,9 +132,6 @@ h3 {
     justify-content: center;
     padding: 12px 0 12px 0;
     gap: 12px;
-    position: fixed;
-    left: 40px;
-    top: 20px;
 }
 
 .showMoreIcon {
@@ -172,19 +169,11 @@ h3 {
     width: 55px;
 }
 
-#showMoreIconRight {
-    position: fixed;
-    top: 1rem;
-    right: 2rem;
+#morePokemons {
+    display: flex;
+    justify-content: center;
 }
 
-#showMoreIconLeft {
-    position: fixed;
-    top: 1rem;
-    right: 6rem;
-}
-
-/* Card Info class*/
 .pokemonName {
     text-align: center;
 }
@@ -331,22 +320,6 @@ h3 {
 
 
 @media (max-width: 700px) {
-    .pokeCardContainer {
-        margin-top: 4rem;
-    }
-
-    #showMoreIconLeft {
-        position: fixed;
-        top: 7rem;
-        right: 60%;
-    }
-
-    #showMoreIconRight {
-        position: fixed;
-        top: 7rem;
-        left: 60%;
-    }
-
     #popUp {
         margin-top: 8rem;
     }
@@ -364,14 +337,5 @@ h3 {
 @media (max-width: 540px) {
     header h1 {
         font-size: 20px;
-    }
-
-
-    #showMoreIconLeft {
-        top: 6rem;
-    }
-
-    #showMoreIconRight {
-        top: 6rem;
     }
 }
