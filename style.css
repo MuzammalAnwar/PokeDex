@@ -330,6 +330,9 @@ img {
     justify-content: space-around;
 }
 
+.no-scroll {
+    overflow: hidden;
+}
 
 @media (max-width: 700px) {
     #popUp {

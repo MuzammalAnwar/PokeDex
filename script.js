@@ -58,6 +58,7 @@ function renderOnePokemonCard(i) {
     inputContent.innerHTML = renderOnePokemonCardTemplate(i);
     returnBackgroundColor(i, `popUp`)
     checkVeryFirstCard(i)
+    document.getElementById('body').classList.add('no-scroll');
 }
 
 function checkVeryFirstCard(i) {

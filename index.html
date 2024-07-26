@@ -12,7 +12,7 @@
     <title>PokeDex</title>
 </head>
 
-<body onload="init()">
+<body onload="init()" id="body">
     <header>
         <h1>My Pokémon Showcase</h1>
         <input type="text" id="searchPokemon" placeholder="Search Pokémon...">
@@ -26,7 +26,8 @@
         </section>
     </header>
     <section class="pokeCardContainer" id="pokeCardContainer"></section>
-    <section id="showPokemonFullCard" class="d-none" onclick="hideElement('showPokemonFullCard','d-none')">
+    <section id="showPokemonFullCard" class="d-none"
+        onclick="hideElement('showPokemonFullCard','d-none'), document.getElementById('body').classList.remove('no-scroll')">
         <div class="popupContainer">
             <div id="popUp" onclick="stopClose(event)"></div>
         </div>
