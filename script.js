@@ -57,14 +57,21 @@ function renderOnePokemonCard(i) {
     let inputContent = document.getElementById('popUp');
     inputContent.innerHTML = renderOnePokemonCardTemplate(i);
     returnBackgroundColor(i, `popUp`)
+    checkVeryFirstCard(i)
+}
+
+function checkVeryFirstCard(i) {
+    if (indexStart == 0 && indexEnd == 20 && i == 0) {
+        hideElement('showMoreIconLeftPokemonCard', 'd-none')
+    }
 }
 
 function showNextPokemonCard(i) {
-    i > 18 ? hideElement('showPokemonFullCard', 'd-none') : renderOnePokemonCard(i + 1);
+    i > 18 ? (showNextPokemons(), renderOnePokemonCard(0)) : renderOnePokemonCard(i + 1);
 }
 
 function showPreviousPokemonCard(i) {
-    i < 1 ? hideElement('showPokemonFullCard', 'd-none') : renderOnePokemonCard(i - 1);
+    i < 1 ? (showPreviousPokemons(), renderOnePokemonCard(19)) : renderOnePokemonCard(i - 1);
 }
 
 function showMoreImg() {

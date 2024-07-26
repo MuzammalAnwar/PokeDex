@@ -65,10 +65,10 @@ function renderOnePokemonCardTemplate(i) {
             </div>
         </div>
         <section id="morePokemons">
-            <div id="showMoreIconLeft" class="">
+            <div id="showMoreIconLeftPokemonCard" class="">
                 <img class="showMoreIconLeft" onclick="showPreviousPokemonCard(${i})" src="./img/showMoreIcon.png">
             </div>
-            <div id="showMoreIconRight">
+            <div id="showMoreIconRightPokemonCard">
                 <img class="showMoreIcon" onclick="showNextPokemonCard(${i})" src="./img/showMoreIcon.png">
             </div>
         </section>
