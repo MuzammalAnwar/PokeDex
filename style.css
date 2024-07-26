@@ -3,9 +3,9 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    align-items: center;
     flex-direction: column;
     background: linear-gradient(360deg, #2E3192 0%, #1BFFFF 100%);
-    max-width: 1920px;
 }
 
 .d-none {
@@ -35,7 +35,7 @@ header {
     background: linear-gradient(0deg, #1BFFFF 0%, #2E3192 100%);
     border-bottom: 2px solid white;
     color: white;
-    padding: 0.75rem;
+    padding: 0.5rem 0 0 0;
     position: sticky;
     top: 0;
     display: flex;
@@ -44,6 +44,7 @@ header {
     text-align: center;
     align-items: center;
     gap: 8px;
+    width: 100%;
 }
 
 input {
@@ -75,8 +76,7 @@ footer {
     padding: 12px 0 12px 0;
 }
 
-header h1,
-footer p {
+header h1 {
     margin: 0;
 }
 
@@ -102,8 +102,13 @@ h3 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 20px;
-    padding: 20px;
+    max-width: 1920px;
+}
+
+#showPokemonFullCard {
+    max-width: 1920px;
 }
 
 .card {

@@ -80,14 +80,14 @@ function showMoreImg() {
     indexStart <= 0 ? hideElement('showMoreIconLeft', 'd-none') : showElement('showMoreIconLeft', 'd-none');
 }
 
-function showNextPokemons() {
+async function showNextPokemons() {
     if (indexEnd < totalAmountOfPokemons) {
         indexStart += 20;
         indexEnd += 20;
         if (indexEnd > totalAmountOfPokemons) {
             indexEnd = totalAmountOfPokemons;
         }
-        getPokemonURL(indexStart + 1, indexEnd);
+        await getPokemonURL(indexStart + 1, indexEnd);
     }
 }
 function showPreviousPokemons() {
